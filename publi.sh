@@ -32,6 +32,10 @@ EOF
 for d in */ ; do
 	echo $d
 
+	if [ -f $d/commit.txt ]; then
+		cat $d/index.htm.tmpl | sed "s/REPLACE_COMMIT/$(cat $d/commit.txt)/" > $d/index.htm
+	fi
+
 	for s in ${d}screenshot* ; do
 		if [ -f $s ]; then
 			echo $s
