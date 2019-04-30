@@ -17,9 +17,18 @@
 
 <!-- iOS icons -->
 <link rel="apple-touch-icon" href="https://labs.lmhd.me/eyes/lucy-gopher-heart.png">
+
+<style>
+#gopher {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
  
 
-<canvas id="gopher" width="112" height="112" style="position: fixed; bottom: 0; right: 0; z-index: 1000;"></canvas>
+<canvas id="gopher" width="112" height="112"></canvas>
   <script>
 
     var mousepos = {"x": 0, "y": 0}
