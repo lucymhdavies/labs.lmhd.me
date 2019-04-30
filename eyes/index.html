@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<!-- Twitter Metadata -->
+<meta name="twitter:card" content="player">
+<meta name="twitter:site" content="@lucydavinhart">
+<meta name="twitter:title" content="Gopher Eyes">
+<meta name="twitter:description" content="Gopher Eyes following your mouse cursor">
+<meta name="twitter:image" content="https://labs.lmhd.me/eyes/screenshot.png?v=20190430.1240">
+<meta name="twitter:player" content="https://labs.lmhd.me/eyes/">
+<meta name="twitter:player:width" content="256">
+<meta name="twitter:player:height" content="256">
+
+<!-- iOS Stuff -->
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<!-- iOS icons -->
+<link rel="apple-touch-icon" href="https://labs.lmhd.me/eyes/lucy-gopher-heart.png">
+ 
+
+<canvas id="gopher" width="112" height="112" style="position: fixed; bottom: 0; right: 0; z-index: 1000;"></canvas>
+  <script>
+
+    var mousepos = {"x": 0, "y": 0}
+
+    var canvas = document.getElementById("gopher");
+    var ctx = canvas.getContext("2d");
+    var gopherimage = new Image();
+    gopherimage.src = 'https://labs.lmhd.me/eyes/gopher.png';
+    var eyeballimage = new Image();
+    eyeballimage.src = 'https://labs.lmhd.me/eyes/eyeball.png';
+    document.addEventListener("mousemove", mousemove, false);
+    eyeballs = [
+      {"x": 29, "y": 38},
+      {"x": 85, "y": 38}
+    ]
+    setInterval(function() {
+      var rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0,0,canvas.width,canvas.height)
+      ctx.drawImage(gopherimage, 0, 0);
+      for (var i = 0; i < eyeballs.length; i++) {
+        mouseX = mousepos["x"] - rect.left;
+        mouseY = mousepos["y"] - rect.top;
+        if (Math.abs(eyeballs[i]["x"] - mouseX) < 10 && Math.abs(eyeballs[i]["y"] - mouseY) < 10) {
+          ctx.drawImage(eyeballimage, mouseX - 6, mouseY - 6)
+        } else {
+          angle = Math.atan2(eyeballs[i]["y"] - mouseY,eyeballs[i]["x"] - mouseX)
+          x = Math.cos(angle) * 10;
+          y = Math.sin(angle) * 10;
+          ctx.drawImage(eyeballimage, eyeballs[i]["x"] - 6 - x, eyeballs[i]["y"] - 6 - y)
+        }
+      }
+    }, 16)
+
+    function mousemove(event) {
+      mousepos["x"] = event["clientX"]
+      mousepos["y"] = event["clientY"]
+    }
+  </script>
