@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 cat << EOF > index.htm
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -33,7 +34,7 @@ for d in */ ; do
 	echo $d
 
 	if [ -f $d/commit.txt ]; then
-		cat $d/index.htm.tmpl | sed "s/REPLACE_COMMIT/$(cat $d/commit.txt)/" > $d/index.htm
+		cat $d/index.htm.tmpl | sed "s#REPLACE_COMMIT#$(cat $d/commit.txt)#" > $d/index.htm
 	fi
 
 	for s in ${d}screenshot* ; do
