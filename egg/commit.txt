@@ -1,1 +1,1 @@
-https://pkg.jsgo.io/github.com/lucymhdavies/egg-game.2f8946148c6a4f43fbdae35b1e1e16c04b8fa810.js
+https://pkg.jsgo.io/github.com/lucymhdavies/egg-game.4bf4744ec975411b8bc420c90968181876845b81.js
